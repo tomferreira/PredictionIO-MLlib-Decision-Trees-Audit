@@ -39,7 +39,7 @@ class NaiveBayesAlgorithm(val ap: AlgorithmParams)
       " and Preprator generates PreparedData correctly.")
       
     val numClasses = 2
-    var m=Map[Integer,Integer]()
+    var m=scala.collections.Map[Integer,Integer]()
     var categoricalFeaturesInfo: java.util.Map[Integer,Integer] = mapAsJavaMap[Integer, Integer](m)
     val impurity = "gini"
     val maxDepth = 5
