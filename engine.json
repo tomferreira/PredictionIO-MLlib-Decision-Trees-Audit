@@ -9,9 +9,9 @@
   },
   "algorithms": [
     {
-      "name": "naive",
+      "name": "decisiontree",
       "params": {
-        "lambda": 1.0
+        "lambda": 1.0        
       }
     }
   ]
