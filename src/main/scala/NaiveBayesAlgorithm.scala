@@ -38,7 +38,7 @@ class NaiveBayesAlgorithm(val ap: AlgorithmParams)
       " Please check if DataSource generates TrainingData" +
       " and Preprator generates PreparedData correctly.")
       
-    val numClasses = 2
+    val numClasses = 3
     var m=Map[Integer,Integer]()
     var categoricalFeaturesInfo: java.util.Map[Integer,Integer] = mapAsJavaMap[Integer, Integer](m)
     val impurity = "gini"
