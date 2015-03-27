@@ -11,7 +11,10 @@
     {
       "name": "decisiontree",
       "params": {
-        "lambda": 1.0        
+        "lambda": 1.0 ,
+        "numClasses": 3,
+        "maxDepth": 5,
+        "maxBins": 100      
       }
     }
   ]

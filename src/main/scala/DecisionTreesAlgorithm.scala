@@ -21,7 +21,10 @@ import org.apache.spark.mllib.util.MLUtils
 import grizzled.slf4j.Logger
 
 case class AlgorithmParams(
-  lambda: Double
+  lambda: Double,
+  numClasses: Integer,
+  maxDepth: Integer,
+  maxBins: Integer
 ) extends Params
 
 // extends P2LAlgorithm because the MLlib's NaiveBayesModel doesn't contain RDD.
@@ -37,22 +40,14 @@ class Algorithm(val ap: AlgorithmParams)
       " Please check if DataSource generates TrainingData" +
       " and Preprator generates PreparedData correctly.")
       
-    val numClasses = 3
     var m=Map[Integer,Integer]()
     var categoricalFeaturesInfo: java.util.Map[Integer,Integer] = mapAsJavaMap[Integer, Integer](m)
     val impurity = "gini"
-    val maxDepth = 5
-    val maxBins = 100
-    //val algo=new Algo.Algo()
-    //Impurity impurity=Gini.instance()
-    //Algo.Algo al=Algo.Classification()
-    //val stat= new Strategy(Algo.Classification,Gini.instance, maxDepth, numClasses,maxBins, categoricalFeaturesInfo)
-    val stat= new Strategy(algo = Classification, impurity = Gini, maxDepth, numClasses,maxBins, categoricalFeaturesInfo)
     
+    val stat= new Strategy(algo = Classification, impurity = Gini, ap.maxDepth, ap.numClasses,ap.maxBins, categoricalFeaturesInfo)
     val tree=new DecisionTree(stat)
     tree.run(data.labeledPoints)
-    //DecisionTree.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,  impurity, maxDepth, maxBins)
-    //NaiveBayes.train(data.labeledPoints, ap.lambda)
+    
   }
 
   def predict(model: DecisionTreeModel, query: Query): PredictedResult = {
