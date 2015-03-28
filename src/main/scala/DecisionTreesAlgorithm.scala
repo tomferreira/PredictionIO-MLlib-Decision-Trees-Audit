@@ -1,6 +1,7 @@
 package org.template.classification
 import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
+import org.apache.spark.SparkContext
 
 import io.prediction.controller.P2LAlgorithm
 import io.prediction.controller.Params
@@ -21,7 +22,7 @@ import org.apache.spark.mllib.util.MLUtils
 import grizzled.slf4j.Logger
 
 case class AlgorithmParams(
-  lambda: Double,
+  
   numClasses: Integer,
   maxDepth: Integer,
   maxBins: Integer
@@ -33,7 +34,7 @@ class Algorithm(val ap: AlgorithmParams)
 
   @transient lazy val logger = Logger[this.type]
 
-  def train(data: PreparedData): DecisionTreeModel = {
+  def train(sc: SparkContext,data: PreparedData): DecisionTreeModel = {
     // MLLib DecisionTree cannot handle empty training data.
     require(!data.labeledPoints.take(1).isEmpty,
       s"RDD[labeldPoints] in PreparedData cannot be empty." +

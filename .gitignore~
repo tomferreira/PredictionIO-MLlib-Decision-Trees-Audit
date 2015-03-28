@@ -2,4 +2,3 @@ data/*.txt
 manifest.json
 pio.log
 target/
-/pio.sbt
