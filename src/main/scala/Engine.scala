@@ -4,7 +4,12 @@ import io.prediction.controller.IEngineFactory
 import io.prediction.controller.Engine
 
 class Query(
-  val features: Array[Double]
+  val profissional : Double,
+  val equipe : Double,
+  val unidade : Double,
+  val empresa : Double,
+  val valor : Double,
+  val gduracao : Double
 ) extends Serializable
 
 class PredictedResult(
