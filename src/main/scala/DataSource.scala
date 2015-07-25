@@ -28,18 +28,21 @@ class DataSource(val dsp: DataSourceParams)
     val eventsDb = Storage.getPEvents()
     val labeledPoints: RDD[LabeledPoint] = eventsDb.aggregateProperties(
       appId = dsp.appId,
-      entityType = "user",
+      entityType = "auditoria",
       // only keep entities with these required properties defined
-      required = Some(List("plan", "attr0", "attr1", "attr2")))(sc)
+      required = Some(List("resultado", "profissional", "equipe", "unidade", "empresa", "valor", "gduracao")))(sc)
       // aggregateProperties() returns RDD pair of
       // entity ID and its aggregated properties
       .map { case (entityId, properties) =>
         try {
-          LabeledPoint(properties.get[Double]("plan"),
+          LabeledPoint(properties.get[Double]("resultado"),
             Vectors.dense(Array(
-              properties.get[Double]("attr0"),
-              properties.get[Double]("attr1"),
-              properties.get[Double]("attr2")
+              properties.get[String]("profissional"),
+              properties.get[String]("equipe"),
+              properties.get[String]("unidade"),
+              properties.get[String]("empresa"),
+              properties.get[Double]("valor"),              
+              properties.get[Double]("gduracao"),
             ))
           )
         } catch {

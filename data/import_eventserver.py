@@ -11,17 +11,20 @@ def import_events(client, file):
   print "Importing data..."
   for line in f:
     data = line.rstrip('\r\n').split(",")
-    plan = data[0]
+    resultado = data[0]
     attr = data[1].split(" ")
     client.create_event(
       event="$set",
-      entity_type="user",
-      entity_id=str(count), # use the count num as user ID
+      entity_type="auditoria",
+      entity_id=str(count), # use the count num as audit ID
       properties= {
-        "attr0" : int(attr[0]),
-        "attr1" : int(attr[1]),
-        "attr2" : int(attr[2]),
-        "plan" : int(plan)
+        "profissional" : attr[0],
+        "equipe" : attr[1],
+        "unidade" : attr[2],
+        "empresa" : attr[3],
+        "valor" : int(attr[4]),
+        "gduracao" : int(attr[5]),
+        "resultado" : int(resultado)
       }
     )
     count += 1
