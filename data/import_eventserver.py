@@ -18,10 +18,10 @@ def import_events(client, file):
       entity_type="auditoria",
       entity_id=str(count), # use the count num as audit ID
       properties= {
-        "profissional" : attr[0],
-        "equipe" : attr[1],
-        "unidade" : attr[2],
-        "empresa" : attr[3],
+        "profissional" : int(attr[0]),
+        "equipe" : int(attr[1]),
+        "unidade" : int(attr[2]),
+        "empresa" : int(attr[3]),
         "valor" : int(attr[4]),
         "gduracao" : int(attr[5]),
         "resultado" : int(resultado)

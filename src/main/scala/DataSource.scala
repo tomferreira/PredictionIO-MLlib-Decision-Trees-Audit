@@ -37,12 +37,12 @@ class DataSource(val dsp: DataSourceParams)
         try {
           LabeledPoint(properties.get[Double]("resultado"),
             Vectors.dense(Array(
-              properties.get[String]("profissional"),
-              properties.get[String]("equipe"),
-              properties.get[String]("unidade"),
-              properties.get[String]("empresa"),
-              properties.get[Double]("valor"),              
-              properties.get[Double]("gduracao"),
+              properties.get[Double]("profissional"),
+              properties.get[Double]("equipe"),
+              properties.get[Double]("unidade"),
+              properties.get[Double]("empresa"),
+              properties.get[Double]("valor"),
+              properties.get[Double]("gduracao")
             ))
           )
         } catch {

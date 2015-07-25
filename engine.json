@@ -4,17 +4,16 @@
   "engineFactory": "org.template.classification.ClassificationEngine",
   "datasource": {
     "params": {
-      "appId": 1
+      "appName": "INVALID_APP_NAME"
     }
   },
   "algorithms": [
     {
       "name": "decisiontree",
-      "params": {
-        
-        "numClasses": 3,
+      "params": {        
+        "numClasses": 2,
         "maxDepth": 5,
-        "maxBins": 100      
+        "maxBins": 100
       }
     }
   ]
