@@ -12,18 +12,18 @@ def import_events(client, file):
   for line in f:
     data = line.rstrip('\r\n').split(",")
     resultado = data[0]
-    attr = data[1].split(" ")
+    attrs = data[1:]
     client.create_event(
       event="$set",
       entity_type="auditoria",
       entity_id=str(count), # use the count num as audit ID
       properties= {
-        "profissional" : int(attr[0]),
-        "equipe" : int(attr[1]),
-        "unidade" : int(attr[2]),
-        "empresa" : int(attr[3]),
-        "valor" : int(attr[4]),
-        "gduracao" : int(attr[5]),
+        "profissional" : int(attrs[0]),
+        "equipe" : int(attrs[1]),
+        "unidade" : int(attrs[2]),
+        "empresa" : int(attrs[3]),
+        "valor" : float(attrs[4]),
+        "gduracao" : int(attrs[5]),
         "resultado" : int(resultado)
       }
     )

@@ -22,7 +22,6 @@ import org.apache.spark.mllib.util.MLUtils
 import grizzled.slf4j.Logger
 
 case class AlgorithmParams(
-  
   numClasses: Integer,
   maxDepth: Integer,
   maxBins: Integer
@@ -41,8 +40,15 @@ class Algorithm(val ap: AlgorithmParams)
       " Please check if DataSource generates TrainingData" +
       " and Preprator generates PreparedData correctly.")
       
-    var m=Map[Integer,Integer]()
-    var categoricalFeaturesInfo: java.util.Map[Integer,Integer] = mapAsJavaMap[Integer, Integer](m)
+    var categoricalFeaturesInfo = mapAsJavaMap(
+      Map(
+        0 -> 3689, // Profissional
+        1 -> 226, // Equipe
+        2 -> 23, // Unidade
+        3 -> 64 // Empresa
+      )
+    ).asInstanceOf[java.util.Map[java.lang.Integer, java.lang.Integer]]
+
     val impurity = "gini"
     
     val stat= new Strategy(algo = Classification, impurity = Gini, ap.maxDepth, ap.numClasses,ap.maxBins, categoricalFeaturesInfo)
@@ -52,7 +58,7 @@ class Algorithm(val ap: AlgorithmParams)
   }
 
   def predict(model: DecisionTreeModel, query: Query): PredictedResult = {
-    val label = model.predict(Vectors.dense(query.features))
+    val label = model.predict(Vectors.dense(query.profissional, query.equipe, query.unidade, query.empresa, query.valor, query.gduracao))
     new PredictedResult(label)
 
   }
