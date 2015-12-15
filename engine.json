@@ -4,16 +4,19 @@
   "engineFactory": "org.template.classification.ClassificationEngine",
   "datasource": {
     "params": {
-      "appName": "INVALID_APP_NAME"
+      "appId": 1,
+      "appName": "AuditoriaApp"
     }
   },
   "algorithms": [
     {
-      "name": "decisiontree",
+      "name": "randomforest",
       "params": {        
         "numClasses": 2,
-        "maxDepth": 5,
-        "maxBins": 100
+        "numTrees": 1500,
+        "featureSubsetStrategy": "auto",
+        "maxDepth": 6,
+        "maxBins": 887
       }
     }
   ]
